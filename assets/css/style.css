@@ -1,0 +1,14 @@
+#today-weather {
+    background-color: blue;
+}
+
+.weather-card {
+    background-color: purple;
+    margin: 0 10px 0 10px;
+}
+
+#future-weather {
+    display: flex;
+    flex-direction: coloumn;
+    align-content: space-between;
+}
