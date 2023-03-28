@@ -4,7 +4,7 @@ var fetchBtn = document.getElementById("fetch-data");
 var weatherForcast = [];
 var storedCityNames = JSON.parse(localStorage.getItem("storedCityNames")) || [];
 
-// getBtn();
+getBtn();
 
 fetchBtn.addEventListener("click", function() {
     var cityName = (document.querySelector("#user-input").value).toLowerCase();
@@ -29,31 +29,35 @@ function getCoordinates(cityName) {
             //rename variables x and y
             var included = [];
             var y = 0
-
-            for (i = 0; i < storedCityNames.length; i++) {
-                var storedName = storedCityNames[i].name;
-
-                if(storedName === cityName) {
+            //check is the city name has already been searched for. If yes then the button is not added, if no then a button is created
+            if(storedCityNames.length === 1) {
+                if (storedCityNames[0] === cityName) {
                     included.push(true)
                 } else {
                     included.push(false)
                 }
-            }
+            } else {
+                for (i = 0; i < storedCityNames.length; i++) {
+                    var storedName = storedCityNames[i].name;
+
+                    if(storedName === cityName) {
+                        included.push(true)
+                    } else {
+                        included.push(false)
+                    }
+                }
+             }
             console.log(included);
             for(j = 0; j < included.length-1; j++) {
                 var x = included[j];
 
                 if(x === true) {
-                    console.log("button already exists");
                     y = 1;
                 }
             }
             if (y !== 1) {
                 createButton(cityName);
             }
-
-
-
         })
         
 }
@@ -114,6 +118,7 @@ function displayWeather(weatherForcast) {
 
     var todaysCity = document.createElement("p");
     todaysCity.textContent = weatherForcast[0].cityName;
+    todaysCity.setAttribute("id", "city-name");
     todaysWeather.appendChild(todaysCity);
 
     var todaysDate = document.createElement("p");
@@ -177,16 +182,15 @@ function displayWeather(weatherForcast) {
 }
 
 //eventListener doesn't work until the page is reloaded
-// var cityBtn = document.querySelectorAll(".cityBtn");
-// console.log(cityBtn);
-// for(i = 0; i < storedCityNames.length; i++) {
-//     cityBtn[i].addEventListener("click", function (event){
-//         console.log("in button");
-//         var element = event.target;
-//         var city = element.getAttribute("data-city");
-//         getCoordinates(city);
-//     });
-// }
+var cityBtn = document.querySelectorAll(".cityBtn");
+for(i = 0; i < storedCityNames.length; i++) {
+    cityBtn[i].addEventListener("click", function (event){
+        console.log("in button");
+        var element = event.target;
+        var city = element.getAttribute("data-city");
+        getCoordinates(city);
+    });
+}
 
 function createButton(cityName) {
     var section = document.getElementById("user");

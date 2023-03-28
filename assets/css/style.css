@@ -1,14 +1,20 @@
 #today-weather {
-    background-color: blue;
+    background-color: #C7C8C7;
 }
 
 .weather-card {
-    background-color: purple;
+    background-color: #999B99;
     margin: 0 10px 0 10px;
+    padding: 0 5px 0 5px;
 }
 
 #future-weather {
     display: flex;
     flex-direction: coloumn;
     align-content: space-between;
+}
+
+#city-name {
+    font-weight: 800;
+    font-size: 18px;
 }
