@@ -1,5 +1,6 @@
 var APIKey = "41ec94a5b9935bcc3e80370c4943b3d9";
-var fetchBtn = document.getElementById("fetch-data");
+var fetchBtn = document.getElementById("search-btn");
+var container = document.getElementById("container");
 
 var weatherForcast = [];
 var storedCityNames = JSON.parse(localStorage.getItem("storedCityNames")) || [];
@@ -12,6 +13,7 @@ fetchBtn.addEventListener("click", function() {
     getCoordinates(cityName);
 });
 
+//function gets the coordinates of the city entered by the user
 function getCoordinates(cityName) {
     var requestURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + APIKey;
 
@@ -63,6 +65,7 @@ function getCoordinates(cityName) {
         
 }
 
+//functions gets the required weather data from the API
 function getWeather(lat, lon) {
     var requestURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=metric";
 
@@ -99,12 +102,13 @@ function getWeather(lat, lon) {
 //creating an element to store all weather data in
 var weatherData = document.createElement("section");
 
+//functions displays the weather on the webpage
 function displayWeather(weatherForcast) {
     //clear the weatherData setion at each run of displayWeather
     weatherData.textContent = '';
 
     weatherData.setAttribute("id", "weather-data");
-    weatherData.setAttribute("class", "col-8");
+    weatherData.setAttribute("class", "col-9");
 
     //creating elements to display todays weather
     var todaysWeather = document.createElement("section");
@@ -144,7 +148,7 @@ function displayWeather(weatherForcast) {
 
     //writing todaysWeather to the document body
     weatherData.appendChild(todaysWeather);
-    document.body.appendChild(weatherData);
+    container.appendChild(weatherData);
 
     //creating a div to store the next 5 days of weather in
     var furtureWeatherDiv = document.createElement("section");
@@ -152,6 +156,7 @@ function displayWeather(weatherForcast) {
     furtureWeatherDiv.setAttribute("class", "row");
 
     var futureWeatherHeading = document.createElement("h3");
+    futureWeatherHeading.setAttribute("id", "future-heading")
     futureWeatherHeading.textContent = "5 Day Forecast:";
     furtureWeatherDiv.appendChild(futureWeatherHeading);
 
@@ -191,7 +196,7 @@ function displayWeather(weatherForcast) {
         //writting the future weather div to the weather data div
         weatherData.appendChild(furtureWeatherDiv);
         //writting everything to the document
-        document.body.appendChild(weatherData);
+        container.appendChild(weatherData);
 
     }
 }
@@ -210,7 +215,6 @@ for(i = 0; i < storedCityNames.length; i++) {
 function createButton(cityName) {
     var section = document.getElementById("user");
     var cityButton = document.createElement("button");
-    
 
     cityButton.setAttribute("data-city", cityName);
     cityButton.setAttribute("type", "button");
@@ -239,7 +243,7 @@ function getBtn () {
     for (i=0; i < storedCityNames.length; i++) {
         var name = storedCityNames[i].name;
         var section = document.getElementById("user");
-        var cityButton = document.createElement("button");        
+        var cityButton = document.createElement("button"); 
 
         cityButton.setAttribute("data-city", name);
         cityButton.setAttribute("type", "button");

@@ -1,12 +1,41 @@
+* {
+    font-family: 'Kantumruy Pro', sans-serif;
+}
+
+header {
+    background: rgb(18,12,112);
+    background: linear-gradient(90deg, rgba(18,12,112,1) 0%, rgba(7,7,167,1) 47%, rgba(0,212,255,1) 100%);
+    color: white;
+    text-shadow: 3px 2px 2px rgba(93, 93, 93, 1);
+    text-align: center;
+    padding: 10px 0 10px 0;
+    font-weight: 800;
+}
+
 #user {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     padding-left: 25px;
+    background-color: #F7F7F7 ;
+}
+
+#input-field {
+    padding: 0 5px 0 5px;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
 #user-input {
     border-radius: 5px;
     font-size: 20px;
+    border: none;
+    
+}
+
+.bi {
+    background-color: #368FF4;
+    padding-top: 5px;
+    border-radius: 5px;
 }
 
 #past-search-serperator {
@@ -14,24 +43,28 @@
     margin: 5px 0 5px 0;
 }
 
-.btn {
-    margin: 5px 0 5px 0;
+.cityBtn {
+    background: rgb(18, 12, 112);
+    background: linear-gradient(90deg, rgba(18, 12, 112, 1) 0%, rgba(7, 7, 167, 1) 47%, rgba(0, 212, 255, 1) 100%);
+    border: none;
 }
 
-#today-weather {
-    background-color: #C7C8C7;
+.btn {
+    margin: 5px 0 5px 0;
+    font-size: 18px;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
+#weather-data {
+    background-image: url("https://www.pixelstalk.net/wp-content/uploads/2016/07/Download-Free-Weather-Background.jpg");
+}
+
+#today-weather, .weather-card{
+    background-color: white;
     text-align: center;
     border-radius: 5px;
     margin: 10px 10px 0 10px;
     padding: 5px 0 5px 0;
-}
-
-.weather-card {
-    background-color: #999B99;
-    margin: 0 10px 0 10px;
-    padding: 5px 0 5px 0;
-    text-align: center;
-    border-radius: 5px;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .date {
@@ -46,4 +79,9 @@
 #city-name {
     font-weight: 800;
     font-size: 25px;
+}
+
+#future-heading {
+    color: white;
+    text-shadow: 3px 2px 2px rgba(93, 93, 93, 1);
 }
