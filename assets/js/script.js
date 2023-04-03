@@ -20,7 +20,6 @@ function getCoordinates(cityName) {
             return response.json();
         })
         .then(function (data) {
-            // console.log(data);
             var lat = data[0].lat;
             var lon = data[0].lon;
         
@@ -29,6 +28,7 @@ function getCoordinates(cityName) {
             //rename variables x and y
             var included = [];
             var y = 0
+
             //check is the city name has already been searched for. If yes then the button is not added, if no then a button is created
             if(storedCityNames.length === 1) {
                 if (storedCityNames[0] === cityName) {
@@ -55,6 +55,7 @@ function getCoordinates(cityName) {
                     y = 1;
                 }
             }
+            //there is not already a button for this location, so one will get created
             if (y !== 1) {
                 createButton(cityName);
             }
@@ -65,12 +66,9 @@ function getCoordinates(cityName) {
 function getWeather(lat, lon) {
     var requestURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=metric";
 
-    // console.log(lat);
-    // console.log(lon);
-
-
     fetch(requestURL)
         .then(function (response) {
+            console.log(response);
             return response.json();
         })
         .then(function (data) {
@@ -94,8 +92,6 @@ function getWeather(lat, lon) {
                 }
                 weatherForcast.push(dailyForcast);
             }
-            console.log(weatherForcast);
-
             displayWeather(weatherForcast);
         })
 }
@@ -108,35 +104,40 @@ function displayWeather(weatherForcast) {
     weatherData.textContent = '';
 
     weatherData.setAttribute("id", "weather-data");
+    weatherData.setAttribute("class", "col-8");
 
     //creating elements to display todays weather
     var todaysWeather = document.createElement("section");
     todaysWeather.setAttribute("id", "today-weather");
-    
 
-    todaysWeather.innerHTML = "";
-
-    var todaysCity = document.createElement("p");
+    //adds the city name
+    var todaysCity = document.createElement("h4");
     todaysCity.textContent = weatherForcast[0].cityName;
     todaysCity.setAttribute("id", "city-name");
     todaysWeather.appendChild(todaysCity);
 
+    //adds todays date
     var todaysDate = document.createElement("p");
     todaysDate.textContent = dayjs().format("MM-DD-YYYY");
+    todaysDate.setAttribute("class", "date");
     todaysWeather.appendChild(todaysDate);
     
+    //adds the weather icon
     var todaysWeatherIcon = document.createElement("img");
     todaysWeatherIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + weatherForcast[1].icon + "@2x.png");
     todaysWeather.appendChild(todaysWeatherIcon);
 
+    //adds the temperature
     var todaysTemp = document.createElement("p");
     todaysTemp.textContent = "Temp: " + weatherForcast[1].temp + "\u00B0C";
     todaysWeather.appendChild(todaysTemp);
 
+    //adds the wind speed
     var todaysWind = document.createElement("p");
     todaysWind.textContent = "Wind: " + weatherForcast[1].wind + "m/s";
     todaysWeather.appendChild(todaysWind);
 
+    //adds the humidity
     var todaysHumidity = document.createElement("p");
     todaysHumidity.textContent = "Humidity: " + weatherForcast[1].humidity + "%";
     todaysWeather.appendChild(todaysHumidity);
@@ -145,37 +146,51 @@ function displayWeather(weatherForcast) {
     weatherData.appendChild(todaysWeather);
     document.body.appendChild(weatherData);
 
-    //create  an element to store next 4 days of weather
-    var futureForcast = document.createElement("section");
-    //creating a card to store each days forcast in
+    //creating a div to store the next 5 days of weather in
     var furtureWeatherDiv = document.createElement("section");
     furtureWeatherDiv.setAttribute("id", "future-weather");
-    for (i = 2; i <= 5; i++) {
-        var weatherCard = document.createElement("div");
-        weatherCard.setAttribute("class", "weather-card");
+    furtureWeatherDiv.setAttribute("class", "row");
 
+    var futureWeatherHeading = document.createElement("h3");
+    futureWeatherHeading.textContent = "5 Day Forecast:";
+    furtureWeatherDiv.appendChild(futureWeatherHeading);
+
+    for (i = 2; i <= 5; i++) {
+        //creating a card to store each days forcast in
+        var weatherCard = document.createElement("div");
+        weatherCard.setAttribute("class", "col weather-card");
+
+        //adds the date
         var todaysDate = document.createElement("p");
         todaysDate.textContent = dayjs().add(i-1, 'day').format("MM-DD-YYYY");
+        todaysDate.setAttribute("class", "date");
         weatherCard.appendChild(todaysDate);
 
+        //adds the weather icon
         var todaysWeatherIcon = document.createElement("img");
         todaysWeatherIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + weatherForcast[i].icon + "@2x.png");
         weatherCard.appendChild(todaysWeatherIcon);
 
+        //adds the temperature
         var todaysTemp = document.createElement("p");
         todaysTemp.textContent = "Temp: " + weatherForcast[i].temp + "\u00B0C";
         weatherCard.appendChild(todaysTemp);
 
+        //adds the wind speed
         var todaysWind = document.createElement("p");
         todaysWind.textContent = "Wind: " + weatherForcast[i].wind + "m/s";
         weatherCard.appendChild(todaysWind);
 
+        //adds the humididty
         var todaysHumidity = document.createElement("p");
         todaysHumidity.textContent = "Humidity: " + weatherForcast[i].humidity + "%";
         weatherCard.appendChild(todaysHumidity);
 
+        //writting each card to the future weather div
         furtureWeatherDiv.appendChild(weatherCard);
+        //writting the future weather div to the weather data div
         weatherData.appendChild(furtureWeatherDiv);
+        //writting everything to the document
         document.body.appendChild(weatherData);
 
     }
@@ -198,7 +213,8 @@ function createButton(cityName) {
     
 
     cityButton.setAttribute("data-city", cityName);
-    cityButton.setAttribute("class", "cityBtn");
+    cityButton.setAttribute("type", "button");
+    cityButton.setAttribute("class", "cityBtn btn btn-secondary");
     
     var firstLetter = cityName.charAt(0);
     var firstLetterCap = firstLetter.toUpperCase();
@@ -208,7 +224,6 @@ function createButton(cityName) {
     cityButton.textContent = capitalWord;
 
     section.appendChild(cityButton);
-    document.body.appendChild(cityButton);
 
     var cityObject = {
         name: cityName
@@ -224,11 +239,11 @@ function getBtn () {
     for (i=0; i < storedCityNames.length; i++) {
         var name = storedCityNames[i].name;
         var section = document.getElementById("user");
-        var cityButton = document.createElement("button");
-        
+        var cityButton = document.createElement("button");        
 
         cityButton.setAttribute("data-city", name);
-        cityButton.setAttribute("class", "cityBtn");
+        cityButton.setAttribute("type", "button");
+        cityButton.setAttribute("class", "cityBtn btn btn-secondary");
 
         var firstLetter = name.charAt(0);
         var firstLetterCap = firstLetter.toUpperCase();
@@ -238,7 +253,6 @@ function getBtn () {
         cityButton.textContent = capitalWord;
 
         section.appendChild(cityButton);
-        document.body.appendChild(cityButton);
     }
 
 }

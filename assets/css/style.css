@@ -1,20 +1,49 @@
+#user {
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+}
+
+#user-input {
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+#past-search-serperator {
+    border-bottom: 1.5px solid black;
+    margin: 5px 0 5px 0;
+}
+
+.btn {
+    margin: 5px 0 5px 0;
+}
+
 #today-weather {
     background-color: #C7C8C7;
+    text-align: center;
+    border-radius: 5px;
+    margin: 10px 10px 0 10px;
+    padding: 5px 0 5px 0;
 }
 
 .weather-card {
     background-color: #999B99;
     margin: 0 10px 0 10px;
-    padding: 0 5px 0 5px;
+    padding: 5px 0 5px 0;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.date {
+    font-weight: 600;
+    font-size: 18px;
 }
 
 #future-weather {
-    display: flex;
-    flex-direction: coloumn;
-    align-content: space-between;
+    margin: 10px;
 }
 
 #city-name {
     font-weight: 800;
-    font-size: 18px;
+    font-size: 25px;
 }
