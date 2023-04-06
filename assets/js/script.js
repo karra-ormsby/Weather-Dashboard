@@ -15,7 +15,7 @@ fetchBtn.addEventListener("click", function() {
 
 //function gets the coordinates of the city entered by the user
 function getCoordinates(cityName) {
-    var requestURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + APIKey;
+    var requestURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + APIKey;
 
     fetch(requestURL)
         .then(function (response) {
@@ -24,6 +24,9 @@ function getCoordinates(cityName) {
         .then(function (data) {
             var lat = data[0].lat;
             var lon = data[0].lon;
+
+            console.log(lat);
+            console.log(lon);
         
             getWeather(lat, lon);
             
@@ -67,7 +70,7 @@ function getCoordinates(cityName) {
 
 //functions gets the required weather data from the API
 function getWeather(lat, lon) {
-    var requestURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=metric";
+    var requestURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=metric";
 
     fetch(requestURL)
         .then(function (response) {
@@ -75,6 +78,7 @@ function getWeather(lat, lon) {
             return response.json();
         })
         .then(function (data) {
+            console.log(data);
             var cityName = data.city.name;
 
             weatherForcast = [];
@@ -157,7 +161,7 @@ function displayWeather(weatherForcast) {
 
     var futureWeatherHeading = document.createElement("h3");
     futureWeatherHeading.setAttribute("id", "future-heading")
-    futureWeatherHeading.textContent = "5 Day Forecast:";
+    futureWeatherHeading.textContent = "4 Day Forecast:";
     furtureWeatherDiv.appendChild(futureWeatherHeading);
 
     for (i = 2; i <= 5; i++) {

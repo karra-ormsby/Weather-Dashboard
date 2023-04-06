@@ -22,20 +22,20 @@ header {
 
 #input-field {
     padding: 0 5px 0 5px;
-    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
 #user-input {
     border-radius: 5px;
     font-size: 20px;
     border: none;
-    
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
-.bi {
+#search-btn{
     background-color: #368FF4;
     padding-top: 5px;
     border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
 #past-search-serperator {
@@ -69,7 +69,7 @@ header {
 
 .date {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 #future-weather {
