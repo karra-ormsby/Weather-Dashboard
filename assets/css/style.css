@@ -12,12 +12,14 @@ header {
     font-weight: 800;
 }
 
-#user {
+main {
     height: 100vh;
+}
+
+#user {
     display: flex;
     flex-direction: column;
     padding-left: 25px;
-    background-color: #F7F7F7 ;
 }
 
 #input-field {
@@ -33,9 +35,13 @@ header {
 
 #search-btn{
     background-color: #368FF4;
-    padding-top: 5px;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
+
+.bi-search {
+    padding-top: 0.3rem;
+    padding-left: 1.2rem;
 }
 
 #past-search-serperator {
@@ -84,4 +90,10 @@ header {
 #future-heading {
     color: white;
     text-shadow: 3px 2px 2px rgba(93, 93, 93, 1);
+}
+
+#search-history {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }

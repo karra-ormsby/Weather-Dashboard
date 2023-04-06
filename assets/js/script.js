@@ -11,6 +11,7 @@ fetchBtn.addEventListener("click", function() {
     var cityName = (document.querySelector("#user-input").value).toLowerCase();
 
     getCoordinates(cityName);
+    
 });
 
 //function gets the coordinates of the city entered by the user
@@ -53,7 +54,7 @@ function getCoordinates(cityName) {
                 }
              }
             console.log(included);
-            for(j = 0; j < included.length-1; j++) {
+            for(j = 0; j < included.length; j++) {
                 var x = included[j];
 
                 if(x === true) {
@@ -112,7 +113,7 @@ function displayWeather(weatherForcast) {
     weatherData.textContent = '';
 
     weatherData.setAttribute("id", "weather-data");
-    weatherData.setAttribute("class", "col-9");
+    weatherData.setAttribute("class", "col-lg-9 col-sm-12");
 
     //creating elements to display todays weather
     var todaysWeather = document.createElement("section");
@@ -205,19 +206,8 @@ function displayWeather(weatherForcast) {
     }
 }
 
-//eventListener doesn't work until the page is reloaded
-var cityBtn = document.querySelectorAll(".cityBtn");
-for(i = 0; i < storedCityNames.length; i++) {
-    cityBtn[i].addEventListener("click", function (event){
-        console.log("in button");
-        var element = event.target;
-        var city = element.getAttribute("data-city");
-        getCoordinates(city);
-    });
-}
-
 function createButton(cityName) {
-    var section = document.getElementById("user");
+    var section = document.getElementById("search-history");
     var cityButton = document.createElement("button");
 
     cityButton.setAttribute("data-city", cityName);
@@ -246,7 +236,7 @@ function createButton(cityName) {
 function getBtn () {
     for (i=0; i < storedCityNames.length; i++) {
         var name = storedCityNames[i].name;
-        var section = document.getElementById("user");
+        var section = document.getElementById("search-history");
         var cityButton = document.createElement("button"); 
 
         cityButton.setAttribute("data-city", name);
@@ -265,6 +255,19 @@ function getBtn () {
 
 }
 
+function searchHistory (event) {
+    var element = event.target;
+    var city = element.getAttribute("data-city");
+    getCoordinates(city);
+}
 
+var userSection = document.getElementById("search-history");
+userSection.addEventListener("click", searchHistory);
+
+// var clearHistory = document.getElementById("clear");
+// clearHistory.addEventListener("click", function () {
+//     localStorage.clear();
+//     userSection.textContent = "";
+// });
 
 
