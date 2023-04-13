@@ -95,7 +95,6 @@ function getForecast(lat, lon) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             var cityName = data.city.name;
 
             weatherForcast = [];
@@ -123,6 +122,7 @@ function getForecast(lat, lon) {
 //creating an element to store all weather data in
 var weatherData = document.createElement("section");
 
+//functions displays the current weather on the webpage
 function displayCurrentWeather(currentForecast) {
     //clear the weatherData setion at each run of displayWeather
     weatherData.textContent = '';
@@ -133,6 +133,11 @@ function displayCurrentWeather(currentForecast) {
     //creating elements to display todays weather
     var todaysWeather = document.createElement("section");
     todaysWeather.setAttribute("id", "today-weather");
+
+    var currentWeatherHeading = document.createElement("h3");
+    currentWeatherHeading.setAttribute("id", "current-heading")
+    currentWeatherHeading.textContent = "Current Weather";
+    weatherData.appendChild(currentWeatherHeading);
 
     //adds the city name
     var todaysCity = document.createElement("h4");
@@ -165,7 +170,7 @@ function displayCurrentWeather(currentForecast) {
     container.appendChild(weatherData);
 }
 
-//functions displays the weather on the webpage
+//functions displays 5 day forecast on the webpage
 function displayForecast(weatherForcast) {
     //creating a div to store the next 5 days of weather in
     var furtureWeatherDiv = document.createElement("section");

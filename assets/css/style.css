@@ -87,7 +87,7 @@ main {
     font-size: 25px;
 }
 
-#future-heading {
+#current-heading, #future-heading {
     color: white;
     text-shadow: 3px 2px 2px rgba(93, 93, 93, 1);
 }
