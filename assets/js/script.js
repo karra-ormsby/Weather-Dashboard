@@ -186,7 +186,7 @@ function displayForecast(weatherForcast) {
     for (i = 1; i <= 5; i++) {
         //creating a card to store each days forcast in
         var weatherCard = document.createElement("div");
-        weatherCard.setAttribute("class", "col weather-card");
+        weatherCard.setAttribute("class", "col-xl-2 col-md-2 col-sm-2 weather-card");
 
         //adds the date
         var todaysDate = document.createElement("p");
