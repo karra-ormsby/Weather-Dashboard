@@ -11,8 +11,9 @@ getBtn();
 fetchBtn.addEventListener("click", function() {
     var cityName = (document.querySelector("#user-input").value).toLowerCase();
 
+    document.querySelector("#user-input").value = "";
+
     getCoordinates(cityName);
-    
 });
 
 //function gets the coordinates of the city entered by the user
